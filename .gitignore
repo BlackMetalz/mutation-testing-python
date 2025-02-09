@@ -1,0 +1,33 @@
+# Python virtual environments
+**/env/
+**/.env/
+**/venv/
+**/.venv/
+
+# Python cache files
+**/__pycache__/
+**/*.py[cod]
+**/*$py.class
+
+# Distribution / packaging
+**/dist/
+**/build/
+**/*.egg-info/
+
+# Unit test / coverage reports
+**/htmlcov/
+**/.tox/
+**/.coverage
+**/.coverage.*
+**/.cache
+**/nosetests.xml
+**/coverage.xml
+**/*.cover
+
+# IDE settings
+**/.idea/
+**/.vscode/
+**/*.swp
+
+# Mutmut
+.mutmut-cache

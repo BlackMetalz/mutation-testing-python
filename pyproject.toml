@@ -1,0 +1,9 @@
+[tool.mutmut]
+paths_to_mutate = "calculator.py"
+backup = false
+runner = "pytest"
+tests_dir = "."
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
