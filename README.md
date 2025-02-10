@@ -18,7 +18,7 @@ python/deep/nested/project/env/
 ```
 
 # Output example.
-- Make sure pytest is able to run: `pytest test_calculator.py -v`
+- Make sure pytest is able to run: `pytest calculator_test.py -v`
 ```
 
 =============================================================================================== test session starts ===============================================================================================
@@ -142,42 +142,35 @@ This test is now comprehensive because it verifies:
 
 The mutation test previously survived because we weren't checking the error message content. Now we are, so any change to the message will cause the test to fail.
 
-# Is __init__.py required
-In modern Python projects, `__init__.py` files are not always required, but they serve several important purposes:
-
-1. **Package Marking**: 
-   - Prior to Python 3.3, `__init__.py` was required to mark a directory as a Python package
-   - With Python 3.3+, the concept of "namespace packages" allows packages without `__init__.py`
-
-2. **Common Use Cases**:
-   - Initialize package-level variables
-   - Import key classes/functions to make them available at package level
-   - Define package-level documentation
-   - Perform package initialization when imported
-
-Here's a typical example of an `__init__.py`:
-
-```python
-"""
-Calculator package for mutation testing example.
-"""
-
-from .calculator import Calculator
-
-__version__ = '0.1.0'
-__all__ = ['Calculator']
+- Run again with cache clear to see the no survivors xD:
+```bash
+rm .mutmut-cache && mutmut run 
 ```
 
-**Recommendations**:
-- Include `__init__.py` if you want to:
-  - Make imports cleaner
-  - Share common package-level attributes
-  - Support older Python versions
-  - Follow traditional Python packaging practices
-- Skip `__init__.py` if you:
-  - Use simple scripts
-  - Don't need package functionality
-  - Only use Python 3.3+
-  - Use namespace packages
+- Expected output:
+```
+- Mutation testing starting -
 
-For your mutation testing project, I recommend including an `__init__.py` file for better organization and compatibility.
+These are the steps:
+1. A full test suite run will be made to make sure we
+   can run the tests successfully and we know how long
+   it takes (to detect infinite loops for example)
+2. Mutants will be generated and checked
+
+Results are stored in .mutmut-cache.
+Print found mutants with `mutmut results`.
+
+Legend for output:
+🎉 Killed mutants.   The goal is for everything to end up in this bucket.
+⏰ Timeout.          Test suite took 10 times as long as the baseline so were killed.
+🤔 Suspicious.       Tests took a long time, but not long enough to be fatal.
+🙁 Survived.         This means your tests need to be expanded.
+🔇 Skipped.          Skipped.
+
+mutmut cache is out of date, clearing it...
+1. Running tests without mutations
+⠴ Running...Done
+
+2. Checking mutants
+⠋ 7/7  🎉 7  ⏰ 0  🤔 0  🙁 0  🔇 0
+```
